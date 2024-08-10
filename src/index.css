@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Belleza&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Oooh+Baby&family=Playwrite+IS:wght@100..200&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: "Belleza";
+  src: local("Belleza-Regular"),
+  url('./assets/Belleza/Belleza-Regular.ttf') 
+  format("truetype");
+}
+@font-face {
+  font-family: 'Mulish';
+  src: local("Mulish-VariableFont_wght"),url('./assets/Mulish/Mulish-VariableFont_wght.ttf'),
+  format("truetype")
+}
+@font-face {
+  font-family: 'Noto_Serif';
+  src: local("NotoSerif-VariableFont_wght") ,url('./assets/Noto_Serif/NotoSerif-VariableFont_wght.ttf')
+  , format("truetype")
+}
+@font-face {
+  font-family: 'Oooh-Baby';
+  src: local("OoohBaby-Regular") , url('./assets/Oooh_Baby/OoohBaby-Regular.ttf') , format("truetype");
+}
+@font-face {
+  font-family: 'Playwrite-IS';
+  src: url();
+}
