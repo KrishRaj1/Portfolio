@@ -8,4 +8,4 @@ function AboutComponent() {
   );
 }
 
-export default About;
+export default AboutComponent;

@@ -5,7 +5,7 @@ function SkillSection() {
     return (
         <div className="p-4 lg:p-8">
             <div className="h-36 w-full flex items-center justify-center">
-                <div className="font-semibold text-3xl">Skills</div>
+                <h2 className="font-semibold text-3xl">Skills</h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 <SkillCardIcon src={"fluent:javascript-16-regular"} text={"JavaScript"} />
