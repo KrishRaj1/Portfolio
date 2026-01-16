@@ -1,0 +1,1 @@
+The previous project sections (PortfolioSection, PortfolioSection2, PortfolioSection3) were replaced by a data-driven grid using ProjectCard and projects.js. The old files now export null to avoid breaking imports while keeping history. You can delete them later.

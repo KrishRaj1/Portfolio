@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import TextWithHover from './TextWithHover';
 import IconShared from './IconShared';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Menu from '../MainComponent/Menu';
 
-function Navbar({ scrollToSection, refs }) {
+function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const menuRef = useRef(null);
 
   const handleMenuClick = () => {
@@ -15,7 +16,7 @@ function Navbar({ scrollToSection, refs }) {
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuOpen(false); // Close the menu if clicking outside of it
+      setMenuOpen(false);
     }
   };
 
@@ -26,31 +27,51 @@ function Navbar({ scrollToSection, refs }) {
     };
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [isDark]);
+
   return (
     <div className="relative">
-      <div className="h-1/12 w-full bg-white flex flex-auto flex-col text-black p-0 overflow-auto">
-        <div className="flex flex-col md:flex-row justify-center w-full h-full m-0 p-5">
+      <div className="w-full bg-white dark:bg-neutral-900 dark:text-white text-black p-0 overflow-auto shadow-sm">
+        <div className="flex flex-col md:flex-row justify-center w-full m-0 p-5">
           <div className="flex justify-center md:justify-normal space-x-4 w-full md:w-6/12 mb-4 md:mb-0">
-            {/* Add other navigation items here if needed */}
+            {/* brand */}
+            <NavLink to="/home" className="font-ooohbaby text-2xl" aria-label="Go to home">Krish Raj</NavLink>
           </div>
 
           <div className="flex justify-around items-center font-semibold w-full md:w-4/12 mb-4 md:mb-0">
-            <Link to="/home" onClick={() => scrollToSection(refs.homeRef)}>
+            <NavLink to="/home">
               <TextWithHover text={"Home"} />
-            </Link>
-            <Link to="/project" onClick={() => scrollToSection(refs.projectRef)}>
+            </NavLink>
+            <NavLink to="/project">
               <TextWithHover text={"Projects"} />
-            </Link>
-            <Link to="/skills" onClick={() => scrollToSection(refs.skillsRef)}>
+            </NavLink>
+            <NavLink to="/skills">
               <TextWithHover text={"Skills"} />
-            </Link>
-            <Link to="/about" onClick={() => scrollToSection(refs.aboutRef)}>
+            </NavLink>
+            <NavLink to="/about">
               <TextWithHover text={"About"} />
-            </Link>
-            <div className="hidden md:block border-r-2 border-black h-3/4"></div>
+            </NavLink>
+            <NavLink to="/contact">
+              <TextWithHover text={"Contact"} />
+            </NavLink>
+            <div className="hidden md:block border-r-2 border-black dark:border-white h-3/4"></div>
           </div>
 
-          <div className="flex space-x-5 justify-center md:justify-normal items-center w-full md:w-1/5 mb-4 md:mb-0">
+          <div className="flex space-x-5 justify-center md:justify-end items-center w-full md:w-2/12 mb-4 md:mb-0">
+            <button
+              aria-label="Toggle theme"
+              className="rounded-full border px-2 py-1 text-sm dark:border-neutral-700"
+              onClick={() => setIsDark((v) => !v)}
+            >
+              {isDark ? 'Light' : 'Dark'}
+            </button>
             <Link to="https://www.instagram.com/krishraj031?igsh=YzljYTk1ODg3Zg==">
               <IconShared icon={"skill-icons:instagram"} fontsize={20} />
             </Link>
@@ -70,19 +91,18 @@ function Navbar({ scrollToSection, refs }) {
             <Link to="https://www.linkedin.com/in/krish-raj-shivhare-7a4806251?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
               <IconShared icon={"devicon:linkedin"} fontsize={20} />
             </Link>
-          </div>
-
-          <div className="flex w-full md:w-1/12 items-center justify-center md:justify-normal">
-            <Icon 
-              icon="icon-park-outline:hamburger-button" 
-              style={{ color: "black" }} 
-              fontSize={25} 
-              onClick={handleMenuClick} // Trigger menu toggle
-            />
+            <div className="flex items-center">
+              <Icon
+                icon="icon-park-outline:hamburger-button"
+                style={{ color: "currentColor" }}
+                fontSize={25}
+                onClick={handleMenuClick}
+              />
+            </div>
           </div>
         </div>
       </div>
-      
+
       {menuOpen && (
         <div ref={menuRef}>
           <Menu onClose={() => setMenuOpen(false)} />
